@@ -25,14 +25,50 @@ export function fibonacci(nbr) {
   return nbr ? n2 : n1;
 }
 
-export function caesarCipher(string, shift) {
-  let resultArray = [];
-  for (let i = 0; i < string.length; i++) {
-    let code = string.charCodeAt(i) + shift;
-    while (code > 122) {
-      code = code - 122 + 96;
+ const alphabet = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z'
+];
+
+export function rot13(str) {
+  let accumulator = '';
+
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+    const isALetter = alphabet.includes(char);
+    if (isALetter === false) {
+      accumulator += char;
+    } else {
+      const charIndex = alphabet.findIndex((c) => c === char);
+
+      accumulator += alphabet[charIndex + 13] || alphabet[charIndex - 13];
     }
-    resultArray.push(String.fromCharCode(code));
   }
-  return resultArray.join("");
+  return accumulator;
 }
+
+console.log(rot13('SERR PBQR PNZC'));
